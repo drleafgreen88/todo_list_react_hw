@@ -13,6 +13,8 @@ function App() {
   const [newTask, setNewTask] = useState
     ()
 
+  const [newPriority, setNewPriority] = useState ()
+
   const completeTask = ((index) => {
     const copyTasks = [... tasks]
     copyTasks[index].isCompleted = true
@@ -30,13 +32,13 @@ function App() {
 
     const handleTaskInput = (event) => {
       setNewTask(event.target.value)
-      // setNewPriority(event.target.value)
+      setNewPriority(event.target.value)
     }
 
     const saveNewTask = ((event) => {
       event.preventDefault()
       const copyTask = [... tasks]
-      copyTask.push({name: newTask, priority: "",
+      copyTask.push({name: newTask, priority: newPriority,
       isCompleted: false})
       setTasks(copyTask)
       setNewTask(newTask)  
@@ -60,7 +62,7 @@ function App() {
         <label htmlFor="high_priority" type = "radio">High Priority</label> 
         <input type="radio" name="priority" id="high"></input>
         <label htmlFor="low_priority" type = "radio">Low Priority</label>
-        <input type="radio" name="priority" id="low"></input>
+        <input type="radio" name="priority" id="low" onChange={handleTaskInput} value={newPriority}></input>
       <input type = "submit" value="Save New Task"/>
       </form>
 
