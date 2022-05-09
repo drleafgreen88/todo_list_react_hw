@@ -13,7 +13,8 @@ function App() {
   const [newTask, setNewTask] = useState
     ()
 
-  const [newPriority, setNewPriority] = useState ()
+  const [newPriority, setNewPriority] = useState 
+    ()
 
   const completeTask = ((index) => {
     const copyTasks = [... tasks]
@@ -32,7 +33,10 @@ function App() {
 
     const handleTaskInput = (event) => {
       setNewTask(event.target.value)
-      setNewPriority(event.target.value)
+      if(event.target.checked === true){
+        setNewPriority(event.target.id)
+      }
+      
     }
 
     const saveNewTask = ((event) => {
@@ -60,7 +64,7 @@ function App() {
       onChange={handleTaskInput} value =
       {newTask}/>
         <label htmlFor="high_priority" type = "radio">High Priority</label> 
-        <input type="radio" name="priority" id="high"></input>
+        <input type="radio" name="priority" id="high" onChange={handleTaskInput} value={newPriority}></input>
         <label htmlFor="low_priority" type = "radio">Low Priority</label>
         <input type="radio" name="priority" id="low" onChange={handleTaskInput} value={newPriority}></input>
       <input type = "submit" value="Save New Task"/>
